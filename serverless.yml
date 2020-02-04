@@ -1,0 +1,40 @@
+service: papertesla-api
+
+org: arroyodev
+app: papertesla-api
+
+provider:
+  name: aws
+  runtime: python3.7
+  stage: production
+  environment:
+    DB_PRICING: ${self:service}-pricing-${opt:stage, self:provider.stage}
+    DB_ORDERS: ${self:service}-orders-${opt:stage, self:provider.stage}
+
+plugins:
+  - serverless-python-requirements
+
+custom:
+  stage: ${opt:stage, self:provider.stage}
+  stack: papertesla-api-${self:custom.stage}
+  tableThroughput: 1
+  pythonRequirements:
+    dockerizePip: true
+    zip: true
+
+functions:
+  create:
+    handler: handler.main
+    role: "ApiHandler"
+    events:
+      - http:
+          path: order
+          method: post
+          cors: true
+
+resources:
+  # Roles
+  - ${file(resources/roles.yml)}
+  # Databases
+  - ${file(resources/dynamodb/pricing.yml)}
+  - ${file(resources/dynamodb/orders.yml)}

@@ -1,0 +1,35 @@
+Resources:
+  ApiHandler:
+    Type: "AWS::IAM::Role"
+    Properties:
+      RoleName: "Lambda-ApiHandler"
+      AssumeRolePolicyDocument:
+        Version: "2012-10-17"
+        Statement:
+          - Effect: "Allow"
+            Principal:
+              Service:
+                - "lambda.amazonaws.com"
+            Action:
+              - "sts:AssumeRole"
+      Policies:
+        - PolicyName: "LambdaRole-DynamoDB-Policy"
+          PolicyDocument:
+            Version: "2012-10-17"
+            Statement:
+              - Effect: "Allow"
+                Action:
+                  - "dynamodb:Query"
+                  - "dynamodb:Scan"
+                  - "dynamodb:UpdateItem"
+                  - "dynamodb:DeleteItem"
+                  - "dynamodb:PutItem"
+                  - "dynamodb:GetItem"
+                  - "dynamodb:BatchGetItem"
+                Resource:
+                  # Pricing Table Resources
+                  - ${cf:${self:custom.stack}.PricingTableArn}
+                  - ${cf:${self:custom.stack}.PricingTableArn}/*
+                  # Orders Table Resources
+                  - ${cf:${self:custom.stack}.OrdersTableArn}
+                  - ${cf:${self:custom.stack}.OrdersTableArn}/*
