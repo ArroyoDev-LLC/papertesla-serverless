@@ -21,6 +21,7 @@ custom:
   pythonRequirements:
     dockerizePip: true
     zip: true
+    usePoetry: false
 
 functions:
   create:
