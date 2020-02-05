@@ -7,11 +7,9 @@ Paper Tesla Serverless Api
 
 
 def handler(event, context):
+    print("Lambda called!")
     print(event)
     print(context.__dict__)
-
-    field = event['field']
-    args = event['args']
 
     return {
         'status': 200,
