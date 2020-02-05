@@ -5,5 +5,8 @@
   "dependencies": {},
   "devDependencies": {
     "serverless-python-requirements": "^5.0.1"
+  },
+  "scripts": {
+    "postinstall": "curl -sSL https://raw.githubusercontent.com/python-poetry/poetry/master/get-poetry.py | python"
   }
 }
