@@ -24,7 +24,7 @@ custom:
 
 functions:
   create:
-    handler: handler.main
+    handler: handler.handler
     role: "ApiHandler"
     events:
       - http:

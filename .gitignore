@@ -230,3 +230,4 @@ dmypy.json
 
 # VSCode
 .vscode
+.envrc
