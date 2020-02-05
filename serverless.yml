@@ -19,7 +19,7 @@ custom:
   stack: papertesla-api-${self:custom.stage}
   tableThroughput: 1
   pythonRequirements:
-    dockerizePip: true
+    dockerizePip: false
     zip: true
     usePoetry: false
 
