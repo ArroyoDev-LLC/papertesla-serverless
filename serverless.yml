@@ -1,7 +1,7 @@
 service: papertesla-api
 
-# org: arroyodev
-# app: papertesla-api
+org: arroyodev
+app: papertesla-api
 
 provider:
   name: aws
@@ -18,6 +18,8 @@ provider:
 plugins:
   - serverless-python-requirements
   - serverless-domain-manager
+  - serverless-dynamodb-local
+  - serverless-offline
 
 custom:
   stage: ${opt:stage, self:provider.stage}
