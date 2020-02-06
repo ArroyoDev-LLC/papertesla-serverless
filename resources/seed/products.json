@@ -1,0 +1,46 @@
+[
+  {
+    "id": 0,
+    "model": "cybertruck",
+    "size": "one-tenth",
+    "pricing": {
+      "base": 25,
+      "lights": 25,
+      "side_wall_mount": 15,
+      "custom_design": 5
+    }
+  },
+  {
+    "id": 1,
+    "model": "cybertruck",
+    "size": "one_fourth",
+    "pricing": {
+      "base": 49,
+      "lights": 49,
+      "side_wall_mount": 29,
+      "custom_design": 5
+    }
+  },
+  {
+    "id": 2,
+    "model": "cybertruck",
+    "size": "one_half",
+    "pricing": {
+      "base": 99,
+      "lights": 79,
+      "side_wall_mount": 49,
+      "custom_design": 5
+    }
+  },
+  {
+    "id": 3,
+    "model": "cybertruck",
+    "size": "full",
+    "pricing": {
+      "base": 199,
+      "lights": 99,
+      "side_wall_mount": 99,
+      "custom_design": 5
+    }
+  }
+]

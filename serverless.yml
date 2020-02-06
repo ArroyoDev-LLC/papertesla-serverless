@@ -33,6 +33,14 @@ custom:
     dockerizePip: false
     zip: true
     usePoetry: false
+  dynamodb:
+    seed:
+      test:
+        sources:
+          - table: ${self:provider.environment.DB_PRODUCTS}
+            sources: [./resources/seed/products.json]
+          - table: ${self:provider.environment.DB_ORDERS}
+            sources: [./resources/seed/orders.json]
 
 functions:
   store:

@@ -1,0 +1,18 @@
+[
+  {
+    "id": 0,
+    "email": "person@example.com",
+    "order": {
+      "productId": 0,
+      "options": {
+        "size": "full",
+        "lights": true,
+        "side_mount": false,
+        "custom_design": false
+      },
+      "pricing": {
+        "retail": 129.99
+      }
+    }
+  }
+]
