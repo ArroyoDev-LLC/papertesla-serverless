@@ -47,7 +47,34 @@ custom:
           - table: ${self:provider.environment.DB_ORDERS}
             sources: [./resources/seed/orders.json]
 
+package:
+  exclude:
+    - .git/**
+    - .vscode/**
+    - .sass-cache/**
+    - amplify/**
+    - node_modules/**
+    - docs/**
+    - schema/**
+    - resources/**
+
+layers:
+  store:
+    path: papertesla
+    name: ${self:provider.stage}-storeLayer
+
 functions:
+  getProducts:
+    handler: papertesla/store.get_products
+    role: "ApiHandler"
+    layers:
+      - { Ref: StoreLambdaLayer }
+    events:
+      - http:
+          path: products
+          method: get
+          cors: true
+
   store:
     handler: papertesla/store.handler
     role: "ApiHandler"
@@ -55,10 +82,6 @@ functions:
       - http:
           path: orders
           method: post
-          cors: true
-      - http:
-          path: products
-          method: get
           cors: true
 
 resources:
