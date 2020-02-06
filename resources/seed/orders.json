@@ -1,6 +1,6 @@
 [
   {
-    "id": 0,
+    "id": "0",
     "email": "person@example.com",
     "order": {
       "productId": 0,

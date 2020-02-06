@@ -34,6 +34,11 @@ custom:
     zip: true
     usePoetry: false
   dynamodb:
+    stages:
+      - dev
+    start:
+      seed: true
+      migrate: true
     seed:
       test:
         sources:

@@ -1,6 +1,6 @@
 [
   {
-    "id": 0,
+    "id": "0",
     "model": "cybertruck",
     "size": "one-tenth",
     "pricing": {
@@ -11,7 +11,7 @@
     }
   },
   {
-    "id": 1,
+    "id": "1",
     "model": "cybertruck",
     "size": "one_fourth",
     "pricing": {
@@ -22,7 +22,7 @@
     }
   },
   {
-    "id": 2,
+    "id": "2",
     "model": "cybertruck",
     "size": "one_half",
     "pricing": {
@@ -33,7 +33,7 @@
     }
   },
   {
-    "id": 3,
+    "id": "3",
     "model": "cybertruck",
     "size": "full",
     "pricing": {
