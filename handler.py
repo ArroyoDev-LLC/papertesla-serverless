@@ -5,13 +5,18 @@
 Paper Tesla Serverless Api
 """
 
+import json
+
 
 def handler(event, context):
     print("Lambda called!")
     print(event)
     print(context.__dict__)
-
-    return {
-        'status': 200,
-        'message': "success!"
+    resp = {
+        'statusCode': 200,
+        'body': json.dumps({
+            "message": "Success!"
+        })
     }
+
+    return resp

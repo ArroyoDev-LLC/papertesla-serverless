@@ -13,6 +13,17 @@ Resources:
             Action:
               - "sts:AssumeRole"
       Policies:
+        - PolicyName: "Lambda-AppSyncServiceRole-Policy"
+          PolicyDocument:
+            Version: "2012-10-17"
+            Statement:
+              - Effect: "Allow"
+                Action:
+                  - "lambda:invokeFunction"
+                Resource:
+                  - "arn:aws:lambda:${self:provider.region}:*:function:papertesla-api-production-create"
+                  - "arn:aws:lambda:${self:provider.region}:*:function:papertesla-api-production-create:*"
+
         - PolicyName: "LambdaRole-DynamoDB-Policy"
           PolicyDocument:
             Version: "2012-10-17"
