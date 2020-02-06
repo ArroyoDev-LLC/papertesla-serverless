@@ -1,6 +1,6 @@
 Resources:
   ProductsTable:
-    Type: 'AWS::DynamoDB::Table'
+    Type: "AWS::DynamoDB::Table"
     Properties:
       KeySchema:
         - AttributeName: id
@@ -8,10 +8,22 @@ Resources:
       AttributeDefinitions:
         - AttributeName: id
           AttributeType: S
+        - AttributeName: model
+          AttributeType: S
       ProvisionedThroughput:
         ReadCapacityUnits: ${self:custom.tableThroughput}
         WriteCapacityUnits: ${self:custom.tableThroughput}
       TableName: ${self:provider.environment.DB_PRODUCTS}
+      GlobalSecondaryIndexes:
+        - IndexName: model-index
+          KeySchema:
+            - AttributeName: model
+              KeyType: HASH
+          Projection:
+            ProjectionType: ALL
+          ProvisionedThroughput:
+            ReadCapacityUnits: ${self:custom.tableThroughput}
+            WriteCapacityUnits: ${self:custom.tableThroughput}
 
 Outputs:
   ProductsTableArn:

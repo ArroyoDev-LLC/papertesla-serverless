@@ -75,9 +75,11 @@ functions:
           method: get
           cors: true
 
-  store:
-    handler: papertesla/store.handler
+  createOrder:
+    handler: papertesla/store.create_order
     role: "ApiHandler"
+    layers:
+      - { Ref: StoreLambdaLayer }
     events:
       - http:
           path: orders
