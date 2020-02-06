@@ -6,18 +6,27 @@ app: papertesla-api
 provider:
   name: aws
   runtime: python3.7
-  stage: production
+  region: us-east-1
+  stage: ${opt:stage, 'dev'}
+  stackName: ${self:custom.stack}
+  tags:
+    PROJECT: papertesla
   environment:
     DB_PRICING: ${self:service}-pricing-${opt:stage, self:provider.stage}
     DB_ORDERS: ${self:service}-orders-${opt:stage, self:provider.stage}
 
 plugins:
   - serverless-python-requirements
+  - serverless-domain-manager
 
 custom:
   stage: ${opt:stage, self:provider.stage}
   stack: papertesla-api-${self:custom.stage}
   tableThroughput: 1
+  customDomain:
+    domainName: api.papertesla.com
+    basePath: v1
+    stage: ${opt:stage, self:provider.stage}
   pythonRequirements:
     dockerizePip: false
     zip: true
@@ -34,8 +43,8 @@ functions:
           cors: true
 
 resources:
-  # Roles
-  - ${file(resources/roles.yml)}
   # Databases
   - ${file(resources/dynamodb/pricing.yml)}
   - ${file(resources/dynamodb/orders.yml)}
+  # Roles
+  - ${file(resources/roles.yml)}
