@@ -22,6 +22,8 @@ TABLES = {
     },
 }
 
+ENDPOINT_URL = os.environ.get('AWS_LOCAL', None)
+
 
 class DynamoDB:
     """
@@ -30,8 +32,10 @@ class DynamoDB:
     """
 
     def __init__(self, table: str):
-        self.client = boto3.client('dynamodb')
-        self.dynamodb = boto3.resource('dynamodb')
+        self.client = boto3.client(
+            'dynamodb', endpoint_url=ENDPOINT_URL)
+        self.dynamodb = boto3.resource(
+            'dynamodb', endpoint_url=ENDPOINT_URL)
         self.table = TABLES[table]
         self.hash = self.table.get('primary_key', 'id')
         self.db = self.dynamodb.Table(self.table['table_name'])
