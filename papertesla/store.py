@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 
-"""Paper Tesla API
+"""Paper Tesla Store
 
-Paper Tesla Serverless Api
+Paper Tesla Serverless Api Store Handler
 """
 
 import json

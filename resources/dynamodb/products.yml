@@ -1,5 +1,5 @@
 Resources:
-  PricingTable:
+  ProductsTable:
     Type: 'AWS::DynamoDB::Table'
     Properties:
       KeySchema:
@@ -11,8 +11,8 @@ Resources:
       ProvisionedThroughput:
         ReadCapacityUnits: ${self:custom.tableThroughput}
         WriteCapacityUnits: ${self:custom.tableThroughput}
-      TableName: ${self:provider.environment.DB_PRICING}
+      TableName: ${self:provider.environment.DB_PRODUCTS}
 
 Outputs:
-  PricingTableArn:
-    Value: { Fn::GetAtt: [PricingTable, Arn] }
+  ProductsTableArn:
+    Value: { Fn::GetAtt: [ProductsTable, Arn] }

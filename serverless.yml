@@ -1,7 +1,7 @@
 service: papertesla-api
 
-org: arroyodev
-app: papertesla-api
+# org: arroyodev
+# app: papertesla-api
 
 provider:
   name: aws
@@ -12,7 +12,7 @@ provider:
   tags:
     PROJECT: papertesla
   environment:
-    DB_PRICING: ${self:service}-pricing-${opt:stage, self:provider.stage}
+    DB_PRODUCTS: ${self:service}-products-${opt:stage, self:provider.stage}
     DB_ORDERS: ${self:service}-orders-${opt:stage, self:provider.stage}
 
 plugins:
@@ -33,18 +33,22 @@ custom:
     usePoetry: false
 
 functions:
-  create:
-    handler: handler.handler
+  store:
+    handler: papertesla/store.handler
     role: "ApiHandler"
     events:
       - http:
-          path: order
+          path: orders
           method: post
+          cors: true
+      - http:
+          path: products
+          method: get
           cors: true
 
 resources:
   # Databases
-  - ${file(resources/dynamodb/pricing.yml)}
+  - ${file(resources/dynamodb/products.yml)}
   - ${file(resources/dynamodb/orders.yml)}
   # Roles
   - ${file(resources/roles.yml)}

@@ -38,9 +38,9 @@ Resources:
                   - "dynamodb:GetItem"
                   - "dynamodb:BatchGetItem"
                 Resource:
-                  # Pricing Table Resources
-                  - ${cf:${self:custom.stack}.PricingTableArn}
-                  - ${cf:${self:custom.stack}.PricingTableArn}/*
+                  # Products Table Resources
+                  - ${cf:${self:custom.stack}.ProductsTableArn}
+                  - ${cf:${self:custom.stack}.ProductsTableArn}/*
                   # Orders Table Resources
                   - ${cf:${self:custom.stack}.OrdersTableArn}
                   - ${cf:${self:custom.stack}.OrdersTableArn}/*
