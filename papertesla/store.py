@@ -28,6 +28,10 @@ def http_response(data: dict, status_code: str = '200') -> dict:
     """
     resp = {
         'statusCode': status_code,
+        'headers': {
+            'Content-Type': 'application/json',
+            'Access-Control-Allow-Origin': 'papertesla.com'
+        },
         'body': json.dumps(data)
     }
     return resp
