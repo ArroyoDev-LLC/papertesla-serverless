@@ -61,7 +61,7 @@ package:
 functions:
   getProducts:
     handler: papertesla/store.get_products
-    role: "ApiHandler"
+    role: 'ApiHandler'
     events:
       - http:
           path: products
@@ -70,7 +70,7 @@ functions:
 
   createOrder:
     handler: papertesla/store.create_order
-    role: "ApiHandler"
+    role: 'ApiHandler'
     events:
       - http:
           path: orders

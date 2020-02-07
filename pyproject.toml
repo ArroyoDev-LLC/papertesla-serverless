@@ -17,6 +17,9 @@ flake8 = "^3.7.9"
 rope = "^0.16.0"
 mypy = "^0.761"
 
+[tool.flake8]
+max-line-length = 100
+
 [build-system]
 requires = ["poetry>=1.0.0"]
 build-backend = "poetry.masonry.api"

@@ -12,13 +12,14 @@ except ImportError:
     pass
 
 import uuid
+from typing import Optional, Union
 
 import simplejson as json
 
 from papertesla import data
 
 
-def http_response(data: dict, status_code: str = '200') -> dict:
+def http_response(data: dict, status_code: Union[str, int] = '200') -> dict:
     """return http response
 
     Args:
@@ -27,7 +28,7 @@ def http_response(data: dict, status_code: str = '200') -> dict:
             Defaults to '200'.
     """
     resp = {
-        'statusCode': status_code,
+        'statusCode': str(status_code),
         'headers': {
             'Content-Type': 'application/json',
             'Access-Control-Allow-Origin': 'papertesla.com'
@@ -37,7 +38,16 @@ def http_response(data: dict, status_code: str = '200') -> dict:
     return resp
 
 
-def find_product(model, size):
+def find_product(model: str, size: str) -> Optional[dict]:
+    """Find product item by model and size
+
+    Args:
+        model: model name
+        size: model size
+
+    Returns:
+        product item
+    """
     size_filter = ("size", size)
     products = data.DynamoDB('products')
     product = iter(products.query(
@@ -48,17 +58,31 @@ def find_product(model, size):
     return next(product, None)
 
 
-def get_products(event, context):
+def get_products(event: dict, context: dict) -> dict:
+    """Fetch all products from database
+
+    Args:
+        event: lambda event
+        context: lambda context
+
+    Returns:
+        http response object
+    """
     products = data.DynamoDB('products')
-    resp = {
-        'statusCode': 200,
-        'body': json.dumps(products.all())
-    }
-    return resp
+    return http_response(products.all())
 
 
-def create_order(event, context):
-    req = json.loads(event.get('body'))
+def create_order(event: dict, context: dict) -> dict:
+    """Creates order item
+
+    Args:
+        event: lambda event
+        context: lambda context
+
+    Returns:
+        http response object
+    """
+    req = json.loads(event.get('body', ''))
     order = req.get('order')
 
     options = order['options']
@@ -66,6 +90,11 @@ def create_order(event, context):
     size = options.pop('size')
 
     product = find_product(order['model'], size)
+
+    if not product:
+        return http_response({
+            'error': "product not found!"
+        }, status_code=400)
 
     # grab prices for each selected addon
     addons = [k for k, v in options.items() if v]
