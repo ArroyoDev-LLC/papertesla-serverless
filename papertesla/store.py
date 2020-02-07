@@ -5,11 +5,32 @@
 Paper Tesla Serverless Api Store Handler
 """
 
+# decompress zipped lambda requirements
+try:
+    import unzip_requirements  # noqa
+except ImportError:
+    pass
+
 import uuid
 
 import simplejson as json
 
 from papertesla import data
+
+
+def http_response(data: dict, status_code: str = '200') -> dict:
+    """return http response
+
+    Args:
+        data: object to return.
+        status_code: HTTP status code.
+            Defaults to '200'.
+    """
+    resp = {
+        'statusCode': status_code,
+        'body': json.dumps(data)
+    }
+    return resp
 
 
 def find_product(model, size):
@@ -69,8 +90,4 @@ def create_order(event, context):
     orders.add_item(order_obj)
 
     # respond
-    resp = {
-        'statusCode': 200,
-        'body': json.dumps(order_obj)
-    }
-    return resp
+    return http_response(order_obj)
