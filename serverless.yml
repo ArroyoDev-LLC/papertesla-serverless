@@ -28,7 +28,7 @@ custom:
   customDomain:
     domainName: api.papertesla.com
     basePath: v1
-    stage: ${opt:stage, self:provider.stage}
+    certificateArn: arn:aws:acm:us-east-1:100482411214:certificate/76a30e34-f26b-427d-88c4-133d9f59f42f
   pythonRequirements:
     dockerizePip: false
     zip: true
@@ -58,17 +58,10 @@ package:
     - schema/**
     - resources/**
 
-layers:
-  store:
-    path: papertesla
-    name: ${self:provider.stage}-storeLayer
-
 functions:
   getProducts:
     handler: papertesla/store.get_products
     role: "ApiHandler"
-    layers:
-      - { Ref: StoreLambdaLayer }
     events:
       - http:
           path: products
@@ -78,8 +71,6 @@ functions:
   createOrder:
     handler: papertesla/store.create_order
     role: "ApiHandler"
-    layers:
-      - { Ref: StoreLambdaLayer }
     events:
       - http:
           path: orders
