@@ -5,7 +5,7 @@
   "dependencies": {},
   "devDependencies": {
     "serverless-domain-manager": "^3.3.1",
-    "serverless-dynamodb-local": "^0.2.39",
+    "serverless-dynamodb-local": "^1.0.2",
     "serverless-offline": "^6.0.0-alpha.65",
     "serverless-python-requirements": "^5.0.1"
   }
